@@ -5,15 +5,15 @@ import _ from './Toggle.module.sass'
 const Toggle = props => {
   const { options, active, style, name, format, onChange } = props
 
-  const handleChange = e => { onChange(e.target.value) }
+  const handleChange = idx => e => { onChange(idx) }
 
   return <div className={_.scenarioToggler} style={style}>
     <span>
       <input
         type='radio'
         checked={active === options[0]}
-        onChange={handleChange}
-        value={options[0]}
+        onChange={handleChange(0)}
+        value={JSON.stringify(options[0])}
         name={`${name}_scenario`}
         id={`${name}_scenario-rcp8.5`} />
       <label className={_.eightFive} htmlFor={`${name}_scenario-rcp8.5`}>
@@ -24,8 +24,8 @@ const Toggle = props => {
       <input
         type='radio'
         checked={active === options[1]}
-        onChange={handleChange}
-        value={options[1]}
+        onChange={handleChange(1)}
+        value={JSON.stringify(options[1])}
         name={`${name}_scenario`}
         id={`${name}_scenario-rcp2.6`} />
       <label className={_.twoSix} htmlFor={`${name}_scenario-rcp2.6`}>
