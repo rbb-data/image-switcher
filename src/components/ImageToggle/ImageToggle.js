@@ -7,15 +7,18 @@ import _ from './ImageToggle.module.sass'
 
 import TabBar from '../_shared/TabBar/TabBar'
 
-export default function ImageToggle ({ selectedImage = 0 }) {
+/**
+ * `images` is an array of entries looking like this:
+ * ```
+ * { src: 'https://url-to-your/image.jpg', label: 'Short Description' }
+ * ```
+ *
+ * @param {Object} props
+ */
+export default function ImageToggle ({ images, selectedImage = 0 }) {
   const containerRef = useRef(null)
   const [currentlySelectedImage, setCurrentlySelectedImage] = useState(selectedImage)
   const [containerHeight, setContainerHeight] = useState('auto')
-  const images = [
-    { src: 'https://i.picsum.photos/id/236/500/500.jpg', label: 'Auf dem Land' },
-    { src: 'https://i.picsum.photos/id/238/500/500.jpg', label: 'In der Stadt' },
-    { src: 'https://i.picsum.photos/id/27/500/500.jpg', label: 'Auf See' }
-  ]
 
   const adjustContainer = img => {
     if (containerHeight === 'auto' || img.height > parseInt(containerHeight.replace(/px$/, ''), 10)) {
@@ -65,5 +68,6 @@ export default function ImageToggle ({ selectedImage = 0 }) {
 }
 
 ImageToggle.propTypes = {
+  images: PropTypes.array.isRequired,
   selectedImage: PropTypes.number
 }

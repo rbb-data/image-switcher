@@ -1,3 +1,5 @@
+/* eslint-env browser */
+
 import React, { useEffect, useState } from 'react'
 import _ from './App.module.sass'
 import qs from 'qs'
@@ -10,7 +12,7 @@ function parseQueryString () {
   return qs.parse(window.location.hash.split('?')[1])
 }
 
-function useQueryString (onChange) {
+function useQueryString () {
   const [query, setQuery] = useState(parseQueryString)
   const onHashChange = _ => setQuery(parseQueryString())
 
@@ -24,9 +26,36 @@ function useQueryString (onChange) {
   return query
 }
 
+function useLocation () {
+  const [location, setLocation] = useState(window.location.href)
+
+  window.addEventListener('lo')
+
+  return location
+}
+
 function App (_props) {
   const imageToggleConfig = useQueryString()
 
+  // this is called on submit
+  const addImage = e => {
+    // fetch current values
+    const form = new FormData(e.target)
+    const images = [].concat(
+      imageToggleConfig.images,
+      [{ src: form.get('imgSrc').trim(), label: form.get('imgLabel').trim() }]
+    ).filter(img => img != null)
+
+    // clear out old values
+    Array.from(e.target.querySelectorAll('input[type=text]'))
+      .forEach(input => { input.value = '' })
+
+    // update state
+    window.location.hash = '?' + qs.stringify({ images })
+    e.preventDefault()
+  }
+
+  // this is called whenever one of the links in the image list is clicked
   const removeImage = idx => e => {
     const images = [].concat(
       imageToggleConfig.images.slice(0, idx),
@@ -38,13 +67,23 @@ function App (_props) {
   }
 
   return <div className={_.app}>
-    <ImageToggle />
+    <h2>Preview</h2>
+    {Array.isArray(imageToggleConfig.images) && imageToggleConfig.images.length
+      ? <>
+        <ImageToggle images={imageToggleConfig.images} />
+        <h2>Embed Code</h2>
+        {/* FIXME: This isn't updated properly */}
+        <textarea readOnly>
+          {'<iframe width="100%" src="' + window.location.href + '&embed"></iframe>'}
+        </textarea>
+      </>
+      : <p>Please add an image using the form below.</p>}
     {/* Appending &embed to the URL in any form will hide the following form
         and create an embeddable version of this page. */}
     {imageToggleConfig.embed == null &&
       <div className={_.imageToggleConfig}>
         <h2>Configuration</h2>
-        <form onSubmit={e => e.preventDefault()}>
+        <form onSubmit={addImage}>
           {Array.isArray(imageToggleConfig.images) &&
             <>
               <h3>Image List</h3>
@@ -59,10 +98,10 @@ function App (_props) {
             </>}
           <h3>Add New Image</h3>
           <div className={_.addImageRow}>
-            <label>Image URL:</label>
-            <input type='text' name='imgUrl' />
             <label>Image Label:</label>
-            <input type='text' name='imgLabel' />
+            <input required type='text' name='imgLabel' />
+            <label>Image URL:</label>
+            <input required type='text' name='imgSrc' />
             <input type='submit' value='+' />
           </div>
         </form>
