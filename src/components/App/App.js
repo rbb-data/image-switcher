@@ -1,14 +1,12 @@
 /* global fetch */
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import 'whatwg-fetch'
 import _ from './App.module.sass'
 
 import ImageToggle from '../ImageToggle/ImageToggle'
 
-function App (_) {
-
-
+function App (_props) {
   return <div className={_.app}>
     <ImageToggle />
   </div>
