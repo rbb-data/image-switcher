@@ -25,17 +25,48 @@ function useQueryString (onChange) {
 }
 
 function App (_props) {
-  const query = useQueryString()
-  console.log('query', query)
+  const imageToggleConfig = useQueryString()
+
+  const removeImage = idx => e => {
+    const images = [].concat(
+      imageToggleConfig.images.slice(0, idx),
+      imageToggleConfig.images.slice(idx + 1)
+    )
+
+    window.location.hash = '?' + qs.stringify({ images })
+    e.preventDefault()
+  }
 
   return <div className={_.app}>
-    <p>
-      Temporibus laudantium rerum quidem. Recusandae asperiores recusandae sunt accusamus. Corrupti repudiandae amet facere. Facere est voluptas magni quod ex consequatur aut quia. Magnam aut ea deserunt est.
-    </p>
     <ImageToggle />
-    <p>
-      Illo consequatur autem culpa qui voluptate fugit. Mollitia et quia est est tempore cum placeat. Non rerum suscipit eius. Libero et atque animi eum. Facilis itaque dignissimos officiis perferendis.
-    </p>
+    {/* Appending &embed to the URL in any form will hide the following form
+        and create an embeddable version of this page. */}
+    {imageToggleConfig.embed == null &&
+      <div className={_.imageToggleConfig}>
+        <h2>Configuration</h2>
+        <form onSubmit={e => e.preventDefault()}>
+          {Array.isArray(imageToggleConfig.images) &&
+            <>
+              <h3>Image List</h3>
+              <ol className={_.imageList}>
+                {imageToggleConfig.images.map((img, idx) =>
+                  <li key={'img-' + idx}>
+                    <strong>{img.label}</strong> – <code>{img.src}</code>
+                    <a href='#' onClick={removeImage(idx)} className={_.removeLink}>Remove Image</a>
+                  </li>
+                )}
+              </ol>
+            </>}
+          <h3>Add New Image</h3>
+          <div className={_.addImageRow}>
+            <label>Image URL:</label>
+            <input type='text' name='imgUrl' />
+            <label>Image Label:</label>
+            <input type='text' name='imgLabel' />
+            <input type='submit' value='+' />
+          </div>
+        </form>
+      </div>}
   </div>
 }
 
