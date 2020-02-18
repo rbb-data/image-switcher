@@ -1,43 +1,63 @@
 /* eslint-env browser */
 
-import React, { useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import _ from './ImageToggle.module.sass'
 
-import Toggle from '../_shared/Toggle/Toggle'
+import TabBar from '../_shared/TabBar/TabBar'
 
 export default function ImageToggle ({ selectedImage }) {
+  const containerRef = useRef(null)
   const [currentlySelectedImage, setCurrentlySelectedImage] = useState(selectedImage || 0)
   const [containerHeight, setContainerHeight] = useState('auto')
   const images = [
     { src: 'https://i.picsum.photos/id/236/500/500.jpg', label: 'Auf dem Land' },
-    { src: 'https://i.picsum.photos/id/238/500/500.jpg', label: 'In der Stadt' }
+    { src: 'https://i.picsum.photos/id/238/500/500.jpg', label: 'In der Stadt' },
+    { src: 'https://i.picsum.photos/id/27/500/500.jpg', label: 'Auf See' }
   ]
 
-  const imageLoaded = e => {
-    // we want to get the unscaled image height
-    const img = new Image()
-    img.src = e.target.src
-
+  const adjustContainer = img => {
     if (containerHeight === 'auto' || img.height > parseInt(containerHeight.replace(/px$/, ''), 10)) {
       setContainerHeight(img.height + 'px')
     }
   }
 
+  // when we load an image, the container should be as high as the tallest one
+  const updateContainerSize = e => adjustContainer(e.target)
+
+  // when the image size changes we update the container size accordingly
+  const monitorAvailableSpace = _ => {
+    if (containerRef.current != null) {
+      // FIXME: This is buggy and doesn't always work
+      setContainerHeight('auto')
+      window.requestAnimationFrame(_ => {
+        let imgs = Array.from(containerRef.current.querySelectorAll('img'))
+        imgs.forEach(img => adjustContainer(img))
+      })
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', monitorAvailableSpace)
+    return () => window.removeEventListener('resize', monitorAvailableSpace)
+  })
+
   return <div className={_.imageToggleComponent}>
-    <figure style={{ height: containerHeight }} className={_.images}>
+    <figure ref={containerRef} style={{ height: containerHeight }} className={_.images}>
       {images.map(
         (img, idx) =>
           <img
-            onLoad={imageLoaded}
+            key={`image-toggle-${idx}`}
+            onLoad={updateContainerSize}
             src={img.src}
             alt={img.label}
             className={currentlySelectedImage === idx ? _.selected : ''} />
       )}
     </figure>
-    <Toggle
-      onChange={setCurrentlySelectedImage}
-      options={images}
+    <TabBar
+      id='foo'
+      onSelect={setCurrentlySelectedImage}
+      tabs={images}
       format={img => img.label}
-      active={images[currentlySelectedImage]} />
+      selectedTab={images[currentlySelectedImage]} />
   </div>
 }
