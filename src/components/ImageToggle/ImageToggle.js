@@ -44,6 +44,12 @@ export default function ImageToggle ({ selectedImage = 0 }) {
   })
 
   return <div className={_.imageToggleComponent}>
+    <TabBar
+      id='foo'
+      onSelect={setCurrentlySelectedImage}
+      tabs={images}
+      format={img => img.label}
+      selectedTab={images[currentlySelectedImage]} />
     <figure ref={containerRef} style={{ height: containerHeight }} className={_.images}>
       {images.map(
         (img, idx) =>
@@ -55,12 +61,6 @@ export default function ImageToggle ({ selectedImage = 0 }) {
             className={currentlySelectedImage === idx ? _.selected : ''} />
       )}
     </figure>
-    <TabBar
-      id='foo'
-      onSelect={setCurrentlySelectedImage}
-      tabs={images}
-      format={img => img.label}
-      selectedTab={images[currentlySelectedImage]} />
   </div>
 }
 
