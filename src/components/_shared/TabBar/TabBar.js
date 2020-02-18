@@ -16,9 +16,9 @@ const TabBar = props => {
             id={`${id}-${i}`}
             type='radio'
             name={id}
-            value={tab}
+            value={i}
             checked={tab === selectedTab}
-            onChange={e => onSelect(e.target.value)} />
+            onChange={_ => onSelect(i)} />
 
           <label htmlFor={`${id}-${i}`}>
             <span className={styles.slant} style={{ backgroundColor: color(tab) }} />
