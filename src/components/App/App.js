@@ -26,14 +26,6 @@ function useQueryString () {
   return query
 }
 
-function useLocation () {
-  const [location, setLocation] = useState(window.location.href)
-
-  window.addEventListener('lo')
-
-  return location
-}
-
 function App (_props) {
   const imageToggleConfig = useQueryString()
 
