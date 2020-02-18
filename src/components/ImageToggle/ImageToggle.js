@@ -41,7 +41,7 @@ export default function ImageToggle ({ selectedImage = 0 }) {
   useEffect(() => {
     window.addEventListener('resize', monitorAvailableSpace)
     return () => window.removeEventListener('resize', monitorAvailableSpace)
-  })
+  }, [])
 
   return <div className={_.imageToggleComponent}>
     <TabBar
