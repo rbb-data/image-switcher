@@ -1,13 +1,15 @@
 /* eslint-env browser */
 
 import React, { useRef, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+
 import _ from './ImageToggle.module.sass'
 
 import TabBar from '../_shared/TabBar/TabBar'
 
-export default function ImageToggle ({ selectedImage }) {
+export default function ImageToggle ({ selectedImage = 0 }) {
   const containerRef = useRef(null)
-  const [currentlySelectedImage, setCurrentlySelectedImage] = useState(selectedImage || 0)
+  const [currentlySelectedImage, setCurrentlySelectedImage] = useState(selectedImage)
   const [containerHeight, setContainerHeight] = useState('auto')
   const images = [
     { src: 'https://i.picsum.photos/id/236/500/500.jpg', label: 'Auf dem Land' },
@@ -60,4 +62,8 @@ export default function ImageToggle ({ selectedImage }) {
       format={img => img.label}
       selectedTab={images[currentlySelectedImage]} />
   </div>
+}
+
+ImageToggle.propTypes = {
+  selectedImage: PropTypes.number
 }
