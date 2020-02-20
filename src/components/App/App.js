@@ -83,7 +83,7 @@ function App (_props) {
                 {imageToggleConfig.images.map((img, idx) =>
                   <li key={'img-' + idx}>
                     <strong>{img.label}</strong> – <code>{img.src}</code>
-                    <a href='#' onClick={removeImage(idx)} className={_.removeLink}>Remove Image</a>
+                    <button onClick={removeImage(idx)} className={_.removeLink}>Remove Image</button>
                   </li>
                 )}
               </ol>
