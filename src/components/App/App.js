@@ -65,39 +65,36 @@ function App (_props) {
         <ImageToggle images={imageToggleConfig.images} />
         <h2>Embed Code</h2>
         {/* FIXME: This isn't updated properly */}
-        <textarea readOnly>
-          {'<iframe width="100%" src="' + window.location.href + '&embed"></iframe>'}
-        </textarea>
+        <textarea readOnly value={'<iframe width="100%" src="' + window.location.href + '&embed"></iframe>'} />
       </>
       : <p>Please add an image using the form below.</p>}
     {/* Appending &embed to the URL in any form will hide the following form
         and create an embeddable version of this page. */}
-    {imageToggleConfig.embed == null &&
-      <div className={_.imageToggleConfig}>
-        <h2>Configuration</h2>
-        <form onSubmit={addImage}>
-          {Array.isArray(imageToggleConfig.images) &&
-            <>
-              <h3>Image List</h3>
-              <ol className={_.imageList}>
-                {imageToggleConfig.images.map((img, idx) =>
-                  <li key={'img-' + idx}>
-                    <strong>{img.label}</strong> – <code>{img.src}</code>
-                    <button onClick={removeImage(idx)} className={_.removeLink}>Remove Image</button>
-                  </li>
-                )}
-              </ol>
-            </>}
-          <h3>Add New Image</h3>
-          <div className={_.addImageRow}>
-            <label>Image Label:</label>
-            <input required type='text' name='imgLabel' />
-            <label>Image URL:</label>
-            <input required type='text' name='imgSrc' />
-            <input type='submit' value='+' />
-          </div>
-        </form>
-      </div>}
+    <div className={_.imageToggleConfig}>
+      <h2>Configuration</h2>
+      <form onSubmit={addImage}>
+        {Array.isArray(imageToggleConfig.images) &&
+          <>
+            <h3>Image List</h3>
+            <ol className={_.imageList}>
+              {imageToggleConfig.images.map((img, idx) =>
+                <li key={'img-' + idx}>
+                  <strong>{img.label}</strong> – <code>{img.src}</code>
+                  <button onClick={removeImage(idx)} className={_.removeLink}>Remove Image</button>
+                </li>
+              )}
+            </ol>
+          </>}
+        <h3>Add New Image</h3>
+        <div className={_.addImageRow}>
+          <label>Image Label:</label>
+          <input required type='text' name='imgLabel' />
+          <label>Image URL:</label>
+          <input required type='text' name='imgSrc' />
+          <input type='submit' value='+' />
+        </div>
+      </form>
+    </div>
   </div>
 }
 
