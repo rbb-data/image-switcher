@@ -1,8 +1,11 @@
 /* eslint-env browser */
 
+import 'iframe-resizer/js/iframeResizer.contentWindow.js'
+
 import React, { useEffect, useState } from 'react'
 import _ from './App.module.sass'
 import qs from 'qs'
+import nanoid from 'nanoid'
 
 import ImageToggle from '../ImageToggle/ImageToggle'
 
@@ -58,14 +61,21 @@ function App (_props) {
     e.preventDefault()
   }
 
+  const nodeId = `rbb-data--image-toggle--${nanoid()}`
+  const embedCode = `<style>
+#${nodeId} { width: 1px; min-width: 100%; }
+</style>
+<iframe allowfullscreen="" width="100%" height="600" frameborder="0" src="${window.location.href}&embed" id="${nodeId}"></iframe>
+<script src="${process.env.PUBLIC_URL}/iframeResizer.min.js"></script>
+<script>iframeResize({}, '#${nodeId}')</script>`
+
   return <div className={_.app}>
     <h2>Preview</h2>
     {Array.isArray(imageToggleConfig.images) && imageToggleConfig.images.length
       ? <>
         <ImageToggle images={imageToggleConfig.images} />
         <h2>Embed Code</h2>
-        {/* FIXME: This isn't updated properly */}
-        <textarea readOnly value={'<iframe width="100%" src="' + window.location.href + '&embed"></iframe>'} />
+        <textarea readOnly value={embedCode} />
       </>
       : <p>Please add an image using the form below.</p>}
     {/* Appending &embed to the URL in any form will hide the following form
