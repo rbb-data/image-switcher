@@ -71,7 +71,7 @@ function App (_props) {
 </style>
 <iframe allowfullscreen="" width="100%" height="600" frameborder="0" src="${window.location.href}&embed=1" id="${nodeId}"></iframe>
 <script src="${process.env.PUBLIC_URL || window.location.origin}/iframeResizer.min.js"></script>
-<script>iframeResize({}, '#${nodeId}')</script>`
+<script>iFrameResize({}, '#${nodeId}')</script>`
 
   // copies text to clipboard and notifies the user on success
   const copyEmbedCode = () => {
