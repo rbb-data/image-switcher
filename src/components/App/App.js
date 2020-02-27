@@ -65,46 +65,54 @@ function App (_props) {
   const embedCode = `<style>
 #${nodeId} { width: 1px; min-width: 100%; }
 </style>
-<iframe allowfullscreen="" width="100%" height="600" frameborder="0" src="${window.location.href}&embed" id="${nodeId}"></iframe>
+<iframe allowfullscreen="" width="100%" height="600" frameborder="0" src="${window.location.href}&embed=1" id="${nodeId}"></iframe>
 <script src="${process.env.PUBLIC_URL}/iframeResizer.min.js"></script>
 <script>iframeResize({}, '#${nodeId}')</script>`
 
   return <div className={_.app}>
-    <h2>Preview</h2>
-    {Array.isArray(imageToggleConfig.images) && imageToggleConfig.images.length
-      ? <>
-        <ImageToggle images={imageToggleConfig.images} />
-        <h2>Embed Code</h2>
-        <textarea readOnly value={embedCode} />
-      </>
-      : <p>Please add an image using the form below.</p>}
     {/* Appending &embed to the URL in any form will hide the following form
         and create an embeddable version of this page. */}
-    <div className={_.imageToggleConfig}>
-      <h2>Configuration</h2>
-      <form onSubmit={addImage}>
-        {Array.isArray(imageToggleConfig.images) &&
-          <>
-            <h3>Image List</h3>
-            <ol className={_.imageList}>
-              {imageToggleConfig.images.map((img, idx) =>
-                <li key={'img-' + idx}>
-                  <strong>{img.label}</strong> – <code>{img.src}</code>
-                  <button onClick={removeImage(idx)} className={_.removeLink}>Remove Image</button>
-                </li>
-              )}
-            </ol>
-          </>}
-        <h3>Add New Image</h3>
-        <div className={_.addImageRow}>
-          <label>Image Label:</label>
-          <input required type='text' name='imgLabel' />
-          <label>Image URL:</label>
-          <input required type='text' name='imgSrc' />
-          <input type='submit' value='+' />
+    {imageToggleConfig.embed == null
+      ? <>
+        {/* show config interface */}
+        <h2>Preview</h2>
+        {Array.isArray(imageToggleConfig.images) && imageToggleConfig.images.length
+          ? <>
+            <ImageToggle images={imageToggleConfig.images} />
+            <h2>Embed Code</h2>
+            <textarea readOnly value={embedCode} />
+          </>
+          : <p>Please add an image using the form below.</p>}
+        <div className={_.imageToggleConfig}>
+          <h2>Configuration</h2>
+          <form onSubmit={addImage}>
+            {Array.isArray(imageToggleConfig.images) &&
+              <>
+                <h3>Image List</h3>
+                <ol className={_.imageList}>
+                  {imageToggleConfig.images.map((img, idx) =>
+                    <li key={'img-' + idx}>
+                      <strong>{img.label}</strong> – <code>{img.src}</code>
+                      <button onClick={removeImage(idx)} className={_.removeLink}>Remove Image</button>
+                    </li>
+                  )}
+                </ol>
+              </>}
+            <h3>Add New Image</h3>
+            <div className={_.addImageRow}>
+              <label>Image Label:</label>
+              <input required type='text' name='imgLabel' />
+              <label>Image URL:</label>
+              <input required type='text' name='imgSrc' />
+              <input type='submit' value='+' />
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      </>
+      : <>
+        {/* show only the embed */}
+        <ImageToggle images={imageToggleConfig.images} />
+      </>}
   </div>
 }
 
