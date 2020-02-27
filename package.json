@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@turf/turf": "^5.1.6",
     "chroma-js": "^2.0.3",
+    "copy-text-to-clipboard": "^2.1.1",
     "fuse.js": "^3.4.4",
     "iframe-resizer": "^4.2.10",
     "leaflet": "^1.4.0",

@@ -3,10 +3,11 @@
 import 'iframe-resizer/js/iframeResizer.contentWindow.js'
 
 import React, { useEffect, useState } from 'react'
-import _ from './App.module.sass'
 import qs from 'qs'
 import nanoid from 'nanoid'
+import copy from 'copy-text-to-clipboard'
 
+import _ from './App.module.sass'
 import ImageToggle from '../ImageToggle/ImageToggle'
 
 // parse query string from location hash
@@ -31,6 +32,9 @@ function useQueryString () {
 
 function App (_props) {
   const imageToggleConfig = useQueryString()
+
+  // looks like: { success: true, timeout: setTimeoutId }
+  const [copyStatus, setCopyStatus] = useState({})
 
   // this is called on submit
   const addImage = e => {
@@ -69,6 +73,20 @@ function App (_props) {
 <script src="${process.env.PUBLIC_URL || window.location.origin}/iframeResizer.min.js"></script>
 <script>iframeResize({}, '#${nodeId}')</script>`
 
+  // copies text to clipboard and notifies the user on success
+  const copyEmbedCode = () => {
+    const copied = copy(embedCode)
+
+    if (copyStatus.id) clearTimeout(copyStatus.id)
+
+    // clear message after 5s on success, 10s when
+    const id = setTimeout(() => setCopyStatus({}), copied ? 5000 : 10000)
+    setCopyStatus({
+      success: copied,
+      id: id
+    })
+  }
+
   return <div className={_.app}>
     {/* Appending &embed to the URL in any form will hide the following form
         and create an embeddable version of this page. */}
@@ -81,6 +99,11 @@ function App (_props) {
             <ImageToggle images={imageToggleConfig.images} />
             <h2>Embed Code</h2>
             <textarea readOnly value={embedCode} />
+            <button onClick={copyEmbedCode}>Copy code</button>
+            {copyStatus.id != null &&
+              (copyStatus.success
+                ? <span className={_.copyMessageSuccess}>Copied!</span>
+                : <span className={_.copyMessageFailure}>Copying failed</span>)}
           </>
           : <p>Please add an image using the form below.</p>}
         <div className={_.imageToggleConfig}>
