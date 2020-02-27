@@ -66,7 +66,7 @@ function App (_props) {
 #${nodeId} { width: 1px; min-width: 100%; }
 </style>
 <iframe allowfullscreen="" width="100%" height="600" frameborder="0" src="${window.location.href}&embed=1" id="${nodeId}"></iframe>
-<script src="${process.env.PUBLIC_URL}/iframeResizer.min.js"></script>
+<script src="${process.env.PUBLIC_URL || window.location.origin}/iframeResizer.min.js"></script>
 <script>iframeResize({}, '#${nodeId}')</script>`
 
   return <div className={_.app}>
