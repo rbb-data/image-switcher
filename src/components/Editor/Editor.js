@@ -1,6 +1,7 @@
 import React from 'react'
 import ImageToggle from 'components/ImageToggle/ImageToggle'
 import EmbedCode from './_EmbedCode'
+import EditLink from './_EditLink'
 import ImageEditor from './_ImageEditor'
 import _ from './Editor.module.sass'
 
@@ -15,6 +16,7 @@ const Editor = ({ images }) => {
           <ImageToggle images={images} />
           <EmbedCode />
           <ImageEditor images={images} />
+          <EditLink />
         </>
       ) : (
         <>
