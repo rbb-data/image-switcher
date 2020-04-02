@@ -36,10 +36,12 @@ const ImageEditor = ({ images }) => {
   const addImage = e => {
     // fetch current values
     const form = new FormData(e.target)
-    const updatedImages = []
-      .concat(images, [
-        { src: form.get('imgSrc').trim(), label: form.get('imgLabel').trim() }
-      ])
+
+    // fix cms.rbb-online URLs
+    const src = form.get('imgSrc').trim().replace(/^(https?:\/\/)cms\.rbb-online\.de\//, '$1www.rbb-online.de/')
+    const label = form.get('imgLabel').trim()
+
+    const updatedImages = [].concat(images, [ { src, label } ])
       .filter(img => img != null)
 
     // clear out old values
