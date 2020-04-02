@@ -10,18 +10,18 @@ import ImageToggle from 'components/ImageToggle/ImageToggle'
 import Editor from 'components/Editor/Editor'
 
 // parse query string from location hash
-function parseQueryString() {
+function parseQueryString () {
   if (!window.location.hash.match(/\?/)) return {}
   return qs.parse(window.location.hash.split('?')[1])
 }
 
-function useQueryString() {
+function useQueryString () {
   const [query, setQuery] = useState(parseQueryString)
   const onHashChange = _ => setQuery(parseQueryString())
 
   useEffect(() => {
     window.addEventListener('hashchange', onHashChange)
-    return function cleanup() {
+    return function cleanup () {
       window.removeEventListener('hashchange', onHashChange)
     }
   })
@@ -29,7 +29,7 @@ function useQueryString() {
   return query
 }
 
-function App(_props) {
+function App (_props) {
   const imageToggleConfig = useQueryString()
 
   return (

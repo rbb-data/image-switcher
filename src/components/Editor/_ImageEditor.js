@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import React from 'react'
 import qs from 'qs'
 import _ from './_ImageEditor.module.sass'
