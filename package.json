@@ -19,6 +19,7 @@
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "qs": "^6.9.1",
+    "ramda": "^0.27.0",
     "react": "^16.8.4",
     "react-app-polyfill": "^1.0.2",
     "react-dom": "^16.8.4",
@@ -42,7 +43,7 @@
     "scripts:geocode-data": "node ./scripts/geocode-data.js",
     "scripts:convert-to-csv": "node ./scripts/convert-to-csv.js",
     "scripts:convert-to-geojson": "node ./scripts/convert-to-geojson.js",
-    "deploy": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/toggle-component/"
+    "deploy": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/corona-distancing-effects/"
   },
   "browserslist": [
     ">0.2%",

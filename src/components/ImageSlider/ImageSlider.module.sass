@@ -1,0 +1,49 @@
+.imageSliderComponent
+  max-width: 100%
+
+.images
+  position: relative
+  box-sizing: content-box
+  padding: 24px 0 36px
+  margin: 0
+  overflow: hidden
+
+  text-align: center
+
+  img
+    display: block
+    max-width: 100%
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    opacity: 0
+
+    transition: opacity 0.3s ease
+
+    &.selected
+      opacity: 1
+
+.imageSliderLabel
+  display: block
+  line-height: 2
+  text-align: center
+
+.rangeContainer
+  position: relative
+  width: 200px
+  margin: 0 auto
+
+  input[type=range]
+    width: 100%
+  
+  .labelMin,
+  .labelMax
+    position: absolute
+
+  .labelMin
+    right: 100%
+    padding-right: .6em
+  
+  .labelMax
+    left: 100%
+    padding-left: .6em
