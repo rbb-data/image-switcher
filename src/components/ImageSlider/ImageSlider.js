@@ -77,7 +77,7 @@ export default function ImageSlider ({ config }) {
         max={config.max}
         step={config.step}
         defaultValue={currentValue}
-        onChange={e => setCurrentValue(parseInt(e.target.value), 10)} />
+        onChange={e => setCurrentValue(parseInt(e.target.value, 10))} />
       <span className={_.labelMax}>{config.max}</span>
     </div>
   </div>
