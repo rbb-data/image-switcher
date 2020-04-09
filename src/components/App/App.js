@@ -10,10 +10,11 @@ import ImageSlider from 'components/ImageSlider/ImageSlider'
 function App (_props) {
   const sliderConfig = {
     urlForValue: val => `./images/circle-${val}.png`,
+    labelForValue: val => `A circle with a width of ${val} pixels.`,
     min: 20,
     max: 100,
     step: 10,
-    label: 'Dauer der Maßnahme in Wochen:'
+    label: 'Effekt der Einschränkungen:'
   }
 
   return (

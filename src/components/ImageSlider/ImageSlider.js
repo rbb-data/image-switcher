@@ -16,7 +16,7 @@ import _ from './ImageSlider.module.sass'
  */
 export default function ImageSlider ({ config }) {
   const containerRef = useRef(null)
-  const [currentValue, setCurrentValue] = useState(config.min)
+  const [currentValue, setCurrentValue] = useState(config.defaultValue || config.min)
   const [containerHeight, setContainerHeight] = useState('auto')
 
   const adjustContainer = img => {
@@ -28,10 +28,10 @@ export default function ImageSlider ({ config }) {
   // TODO: This is really wasteful, there should be a better way
   const images = range(config.min, config.max + 1)
     .filter(val => (val - config.min) % config.step === 0)
-    .map(val => [val, config.urlForValue(val)])
+    .map(val => [val, { src: config.urlForValue(val), alt: config.labelForValue(val) }])
 
-  console.log('config', config)
-  console.log('images', images)
+  // console.log('config', config)
+  // console.log('images', images)
 
   // when we load an image, the container should be as high as the tallest one
   const updateContainerSize = e => adjustContainer(e.target)
@@ -53,18 +53,22 @@ export default function ImageSlider ({ config }) {
     return () => window.removeEventListener('resize', monitorAvailableSpace)
   }, [])
 
+  // the 1.3 is a bit arbitrary and chosen by trial and error, but it fits a two-digit number perfectly (no padding on either side)
+  const valueContainerWidth = (Math.floor(Math.log10(config.min)) * 1.3) + 'em'
+
   return <div className={_.imageSliderComponent}>
     <figure ref={containerRef} style={{ height: containerHeight }} className={_.images}>
       {images.map(
-        ([val, src]) =>
+        ([val, img]) =>
           <img
             key={`image-slider-${val}`}
             onLoad={updateContainerSize}
-            src={src}
+            src={img.src}
+            alt={img.alt}
             className={currentValue === val ? _.selected : ''} />
       )}
     </figure>
-    <span className={_.imageSliderLabel}>{config.label} {currentValue}</span>
+    <span className={_.imageSliderLabel}>{config.label} <span className={_.valueContainer} style={{ 'width': valueContainerWidth }}>{currentValue}</span></span>
     <div className={_.rangeContainer}>
       <span className={_.labelMin}>{config.min}</span>
       <input
