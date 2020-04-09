@@ -9,10 +9,10 @@ import ImageSlider from 'components/ImageSlider/ImageSlider'
 
 function App (_props) {
   const sliderConfig = {
-    urlForValue: val => `./images/circle-${val}.png`,
-    labelForValue: val => `A circle with a width of ${val} pixels.`,
-    min: 20,
-    max: 100,
+    urlForValue: val => `./images/effect/${val}.svg`,
+    labelForValue: val => `SIR-Kurve mit einem Maßnahmeneffekt von ${val}%`,
+    min: 10,
+    max: 90,
     step: 10,
     label: 'Effekt der Einschränkungen:'
   }

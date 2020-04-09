@@ -57,6 +57,20 @@ export default function ImageSlider ({ config }) {
   const valueContainerWidth = (Math.floor(Math.log10(config.defaultValue || config.min)) * 1.3) + 'em'
 
   return <div className={_.imageSliderComponent}>
+    <section>
+      <span className={_.imageSliderLabel}>{config.label} <span className={_.valueContainer} style={{ 'width': valueContainerWidth }}>{currentValue}</span></span>
+      <div className={_.rangeContainer}>
+        <span className={_.labelMin}>{config.min}</span>
+        <input
+          type='range'
+          min={config.min}
+          max={config.max}
+          step={config.step}
+          defaultValue={currentValue}
+          onChange={e => setCurrentValue(parseInt(e.target.value, 10))} />
+        <span className={_.labelMax}>{config.max}</span>
+      </div>
+    </section>
     <figure ref={containerRef} style={{ height: containerHeight }} className={_.images}>
       {images.map(
         ([val, img]) =>
@@ -68,18 +82,6 @@ export default function ImageSlider ({ config }) {
             className={currentValue === val ? _.selected : ''} />
       )}
     </figure>
-    <span className={_.imageSliderLabel}>{config.label} <span className={_.valueContainer} style={{ 'width': valueContainerWidth }}>{currentValue}</span></span>
-    <div className={_.rangeContainer}>
-      <span className={_.labelMin}>{config.min}</span>
-      <input
-        type='range'
-        min={config.min}
-        max={config.max}
-        step={config.step}
-        defaultValue={currentValue}
-        onChange={e => setCurrentValue(parseInt(e.target.value, 10))} />
-      <span className={_.labelMax}>{config.max}</span>
-    </div>
   </div>
 }
 

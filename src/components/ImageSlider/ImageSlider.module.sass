@@ -3,10 +3,12 @@
 .imageSliderComponent
   max-width: 100%
 
+  > :first-child
+    padding: 24px 0 36px
+
 .images
   position: relative
   box-sizing: content-box
-  padding: 24px 0 36px
   margin: 0
   overflow: hidden
 
@@ -20,7 +22,7 @@
     transform: translateX(-50%)
     opacity: 0
 
-    transition: opacity 0.3s ease
+    // transition: opacity 0.3s ease
 
     &.selected
       opacity: 1
