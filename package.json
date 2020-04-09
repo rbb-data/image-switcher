@@ -43,7 +43,8 @@
     "scripts:geocode-data": "node ./scripts/geocode-data.js",
     "scripts:convert-to-csv": "node ./scripts/convert-to-csv.js",
     "scripts:convert-to-geojson": "node ./scripts/convert-to-geojson.js",
-    "deploy": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/corona-distancing-effects/"
+    "deploy:effects": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/corona-distancing-effects/",
+    "deploy:duration": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/corona-distancing-duration/"
   },
   "browserslist": [
     ">0.2%",

@@ -1,4 +1,84 @@
-# rbb-data starter
+# Image Slider
+
+To get started clone the repository and make sure you are on the correct branch and have all dependencies installed:
+
+```
+git clone https://docs.rbb-online.de/bitbucket/scm/rdat/toggle-component.git
+cd toggle-component
+git checkout feature/image-slider
+npm install
+```
+
+Noice. To start a development server run:
+
+```
+npm start
+```
+
+Noice. A tab should open pointing you to `localhost:3000`.
+
+## Change the images
+
+The slider is configured in `src/components/App/App.js`:
+
+``` js
+const sliderConfig = {
+  urlForValue: val => `./images/effect/${val}.svg`,
+  labelForValue: val => `SIR-Kurve mit einem Maßnahmeneffekt von ${val}%`,
+  min: 10,
+  max: 90,
+  step: 10,
+  label: 'Effekt der Einschränkungen:'
+}
+```
+
+`urlForValue` are `labelForValue` are functions that return an image path and an alt-text for screenreaders for the current value of the slider. `min`, `max` and `step` define the allowed range, which is inclusive (i.e. if `max` is 90 you will be able to select `90` and not `89`). The `label` is displayed above the whole widget and will be displayed with the current value.
+
+When adding images, make sure to put them somewhere in the `public` folder. Paths returned by `urlForValue` can be relative to that folder.
+
+## Deployment
+
+Easy as 🥧! You build all the assets with `npm run build`. Depending on which project you want to deploy run one of the following commands directly afterwards.
+
+```
+# uploads to https://dj1.app.rbb-cloud.de/corona-distancing-effects/
+npm run deploy:effects
+
+# uploads to  https://dj1.app.rbb-cloud.de/corona-distancing-duration/
+npm run deploy:duration
+```
+
+## Embed Code
+
+Either
+
+```
+<style>
+#rbb-data--image-slider--corona-distancing-effects { width: 1px; min-width: 100%; }
+@media screen and (max-width: 630px) {
+  #rbb-data--image-slider--corona-distancing-effects { width: 100%; margin-left: 0; }
+}
+</style>
+<iframe allowfullscreen="" id="rbb-data--image-slider--corona-distancing-effects" scrolling="no" src="https://dj1.app.rbb-cloud.de/corona-distancing-effects/" height="600" frameborder="0"></iframe>
+<script src="https://dj1.app.rbb-cloud.de/toggle-component/iframeResizer.min.js"></script>
+<script>iFrameResize({}, '#rbb-data--image-slider--corona-distancing-effects')</script>
+```
+
+or
+
+```
+<style>
+#rbb-data--image-slider--corona-distancing-duration { width: 1px; min-width: 100%; }
+@media screen and (max-width: 630px) {
+  #rbb-data--image-slider--corona-distancing-duration { width: 100%; margin-left: 0; }
+}
+</style>
+<iframe allowfullscreen="" id="rbb-data--image-slider--corona-distancing-duration" scrolling="no" src="https://dj1.app.rbb-cloud.de/corona-distancing-curation/" height="600" frameborder="0"></iframe>
+<script src="https://dj1.app.rbb-cloud.de/toggle-component/iframeResizer.min.js"></script>
+<script>iFrameResize({}, '#rbb-data--image-slider--corona-distancing-duration')</script>
+```
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
