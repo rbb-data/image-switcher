@@ -44,7 +44,9 @@
     "scripts:convert-to-csv": "node ./scripts/convert-to-csv.js",
     "scripts:convert-to-geojson": "node ./scripts/convert-to-geojson.js",
     "deploy:effects": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/corona-distancing-effects/",
-    "deploy:duration": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/corona-distancing-duration/"
+    "deploy:duration": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/corona-distancing-duration/",
+    "build-and-deploy:effects": "cross-env PUBLIC_URL=https://dj1.app.rbb-cloud.de/corona-distancing-effects/ run-s build deploy:effects",
+    "build-and-deploy:duration": "cross-env PUBLIC_URL=https://dj1.app.rbb-cloud.de/corona-distancing-duration/ run-s build deploy:duration"
   },
   "browserslist": [
     ">0.2%",
@@ -62,6 +64,7 @@
     "@storybook/addons": "5.0.3",
     "@storybook/react": "^5.3.18",
     "@storybook/storybook-deployer": "2.8.1",
+    "cross-env": "^7.0.2",
     "d3-dsv": "^1.2.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-react": "^7.0.2",
@@ -70,6 +73,7 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
+    "npm-run-all": "^4.1.5",
     "request-promise": "^4.2.5",
     "storybook-addon-smart-knobs": "^4.1.2"
   }

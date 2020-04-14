@@ -42,10 +42,10 @@ Easy as 🥧! You build all the assets with `npm run build`. Depending on which 
 
 ```
 # uploads to https://dj1.app.rbb-cloud.de/corona-distancing-effects/
-npm run deploy:effects
+npm run build-and-deploy:effects
 
 # uploads to  https://dj1.app.rbb-cloud.de/corona-distancing-duration/
-npm run deploy:duration
+npm run build-and-deploy:duration
 ```
 
 ## Embed Code
@@ -77,6 +77,21 @@ or
 <script src="https://dj1.app.rbb-cloud.de/toggle-component/iframeResizer.min.js"></script>
 <script>iFrameResize({}, '#rbb-data--image-slider--corona-distancing-duration')</script>
 ```
+
+## Add an additional slider
+
+To add an additional slider you need to do edit two files:
+
+- `src/components/App/App.js` for the configuration
+- `package.json` for deployment
+
+To configure deployment, add an additional `deploy:...` task, where `...` is a short description of your slider. Change the target directory (`/var/www/...` at the end of the line) so that `...` matches the name you just chose. Add an additional `build-and-deploy:...` task by copying one of the existing ones and changing `PUBLIC_URL` so that the folder matches your chosen `...`.
+
+The embed-code will have to be adjusted as well. Choose a unique ID and change it in lines 2, 4, 7 and 9. Make sure to also change the `src` attribute in line 7.
+
+## If all goes wrong
+
+The server is backed up every hour at 00:59, 01:59, 02:59 and so on. If something breaks those backups can be restored.
 
 ---
 
