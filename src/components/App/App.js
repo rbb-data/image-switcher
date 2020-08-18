@@ -15,12 +15,12 @@ function App (_props) {
     //max: 8,
     //step: 1,
     //label: 'Wochen mit aktuellen Einschränkungen:'
-    urlForValue: val => `./images/share_of_r0_after_intervention/${100-val}Mod.svg`,
-    labelForValue: val => `SIR-Kurve mit Effekitivität der Maßnahmen von ${100-val}%`,
-    min: 0,
-    max: 50,
-    step: 10,
-    label: 'Rückgang der Neuansteckungen pro Infizierten (in %):'
+    urlForValue: val => `./images/schutzsuchendenquote/${val}.svg`,
+    labelForValue: val => `Situation für das Jahr ${val}`,
+    min: 2014,
+    max: 2019,
+    step: 1,
+    label: 'Anteil Schutzsuchende im Jahr:'
   }
 
   return (
