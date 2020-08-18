@@ -15,7 +15,7 @@ function App (_props) {
     //max: 8,
     //step: 1,
     //label: 'Wochen mit aktuellen Einschränkungen:'
-    urlForValue: val => `./images/schutzsuchendenquote/${val}.svg`,
+    urlForValue: val => `./images/schutzsuchendenquote/${val}_1.svg`,
     labelForValue: val => `Situation für das Jahr ${val}`,
     min: 2014,
     max: 2019,
