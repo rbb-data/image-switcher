@@ -1,8 +1,7 @@
 # Image Switcher
 
-Simple tool to merge multiple images into a tabbed view of them
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple tool to merge multiple images into a tabbed view of them.
+There is also a [datawrapper-swither](https://github.com/rbb-data/datawrapper-switcher) to do the same for datawrapper embeds
 
 ## Usage
 
