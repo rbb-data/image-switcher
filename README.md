@@ -1,7 +1,7 @@
 # Image Switcher
 
 Simple tool to merge multiple images into a tabbed view of them.  
-There is also a [datawrapper-swither](https://github.com/rbb-data/datawrapper-switcher) to do the same for datawrapper embeds
+There is also a [datawrapper-switcher](https://github.com/rbb-data/datawrapper-switcher) to do the same for datawrapper embeds
 
 ## Usage
 
