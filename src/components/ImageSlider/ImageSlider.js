@@ -53,12 +53,9 @@ export default function ImageSlider ({ config }) {
     return () => window.removeEventListener('resize', monitorAvailableSpace)
   }, [])
 
-  // the 1.3 is a bit arbitrary and chosen by trial and error, but it fits a two-digit number perfectly (no padding on either side)
-  const valueContainerWidth = (Math.floor(Math.log10(config.defaultValue || config.min)) * 1.3) + 'em'
-
   return <div className={_.imageSliderComponent}>
     <section>
-      <span className={_.imageSliderLabel}>{config.label} <span className={_.valueContainer} style={{ 'width': valueContainerWidth }}>{currentValue}</span></span>
+      <span className={_.imageSliderLabel}>{config.label(currentValue)}</span>
       <div className={_.rangeContainer}>
         <span className={_.labelMin}>{config.min}</span>
         <input
