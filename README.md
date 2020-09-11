@@ -37,17 +37,14 @@ When adding images, make sure to put them somewhere in the `public` folder. Path
 
 ## Deployment
 
-Easy as 🥧! You build all the assets with `npm run build`. Depending on which project you want to deploy run one of the following commands directly afterwards.
+Easy as 🥧! You only need to decide where you want to put it. Say, for example, you have many sliders all dealing with the topic of a second wave of Covid-19 approaching and the one you're working on at the moment compares what's going on all over Germany, then `corona-second-wave/nationwide-comparison` is a good idea. This creates a `corona-second-wave` folder on the server, neatly grouping all related sliders, and puts the current slider into `nationwide-comparison`. Depending on which project you want to deploy run one of the following commands directly afterwards.
 
 ```
-# Deploy already built artefacts
-npm run build-and-deploy corona-second-wave/nationwide-comparison
-
 # Builds and deploys in one step
 npm run build-and-deploy corona-second-wave/nationwide-comparison
 ```
 
-The last argument determines the server path. In the above case the slider can accessed at https://dj1.app.rbb-cloud.de/image-sliders/corona-second-wave/nationwide-comparison/. All sliders are put into subfolders of https://dj1.app.rbb-cloud.de/image-sliders.
+In the above case the slider can accessed at https://dj1.app.rbb-cloud.de/image-sliders/corona-second-wave/nationwide-comparison/ (you also get a path to the slider on when running the command). All sliders are put into subfolders of https://dj1.app.rbb-cloud.de/image-sliders.
 
 ## Embed Code
 
