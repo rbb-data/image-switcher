@@ -3,7 +3,7 @@
 To get started clone the repository and make sure you are on the correct branch and have all dependencies installed:
 
 ```
-git clone -b feature/image-slider https://docs.rbb-online.de/bitbucket/scm/rdat/toggle-component.git image-slider
+git clone -b feature/image-slider https://github.com/rbb-data/image-switcher.git image-slider
 cd image-slider
 npm install
 ```
@@ -27,11 +27,11 @@ const sliderConfig = {
   min: 10,
   max: 90,
   step: 10,
-  label: 'Effekt der Einschränkungen:'
+  label: val => 'Effekt der Einschränkungen: ' + val
 }
 ```
 
-`urlForValue` are `labelForValue` are functions that return an image path and an alt-text for screenreaders for the current value of the slider. `min`, `max` and `step` define the allowed range, which is inclusive (i.e. if `max` is 90 you will be able to select `90` and not `89`). The `label` is displayed above the whole widget and will be displayed with the current value.
+`urlForValue` are `labelForValue` are functions that return an image path and an alt-text for screenreaders for the current value of the slider. `min`, `max` and `step` define the allowed range, which is inclusive (i.e. if `max` is 90 you will be able to select `90` and not `89`). The `label` is displayed above the whole widget and will be called with the current value.
 
 When adding images, make sure to put them somewhere in the `public` folder. Paths returned by `urlForValue` can be relative to that folder.
 
