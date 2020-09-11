@@ -27,7 +27,8 @@ const sliderConfig = {
   min: 10,
   max: 90,
   step: 10,
-  label: val => 'Effekt der Einschränkungen: ' + val
+  label: val => 'Effekt der Einschränkungen: ' + val,
+  title: "Foobar" // ← optional
 }
 ```
 

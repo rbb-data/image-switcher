@@ -55,6 +55,7 @@ export default function ImageSlider ({ config }) {
 
   return <div className={_.imageSliderComponent}>
     <section>
+      {config.title != null && <h1 className={_.imageSliderTitle}>{config.title}</h1>}
       <span className={_.imageSliderLabel}>{config.label(currentValue)}</span>
       <div className={_.rangeContainer}>
         <span className={_.labelMin}>{config.min}</span>
