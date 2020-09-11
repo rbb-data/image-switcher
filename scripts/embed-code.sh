@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-SERVER_PATH="$1"
-SLIDER_ID="$( echo $SERVER_PATH | sed 's#/#-#g' )"
+SERVER_PATH="$( echo $1 | sed 's#/+$##' )" # remove trailing slashes
+SLIDER_ID="$( echo $1 | sed 's#/#-#g' )" # replace slashes with dashes so we can use them as the id attribute
 
 cat << EOF
 <style>
@@ -10,7 +10,7 @@ cat << EOF
   #rbb-data--image-slider--$SLIDER_ID { width: 100%; margin-left: 0; }
 }
 </style>
-<iframe allowfullscreen="" id="rbb-data--image-slider--$SLIDER_ID" scrolling="no" src="https://dj1.app.rbb-cloud.de/image-sliders/$SERVER_PATH" height="600" frameborder="0"></iframe>
+<iframe allowfullscreen="" id="rbb-data--image-slider--$SLIDER_ID" scrolling="no" src="https://dj1.app.rbb-cloud.de/image-sliders/$SERVER_PATH/" height="600" frameborder="0"></iframe>
 <script src="https://dj1.app.rbb-cloud.de/image-sliders/$SERVER_PATH/iframeResizer.min.js"></script>
 <script>iFrameResize({}, '#rbb-data--image-slider--$SLIDER_ID')</script>
 EOF
