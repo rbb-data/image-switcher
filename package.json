@@ -43,9 +43,11 @@
     "scripts:geocode-data": "node ./scripts/geocode-data.js",
     "scripts:convert-to-csv": "node ./scripts/convert-to-csv.js",
     "scripts:convert-to-geojson": "node ./scripts/convert-to-geojson.js",
-    "deploy:refugee_quota": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/refugee_quota/",
-    "build-and-deploy:refugee_quota": "cross-env PUBLIC_URL=https://dj1.app.rbb-cloud.de/refugee_quota/ run-s build deploy:refugee_quota"
-   },
+    "deploy:corona-second-wave:nationwide-1": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/image-sliders/corona-second-wave/nationwide-1/",
+    "deploy:corona-second-wave:nationwide-2": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/image-sliders/corona-second-wave/nationwide-1/",
+    "build-and-deploy:corona-second-wave:nationwide-1": "cross-env PUBLIC_URL=https://dj1.app.rbb-cloud.de/image-sliders/corona-second-wave/nationwide-1/ run-s build deploy:corona-second-wave:nationwide-1",
+    "build-and-deploy:corona-second-wave:nationwide-2": "cross-env PUBLIC_URL=https://dj1.app.rbb-cloud.de/image-sliders/corona-second-wave-nationwide/nationwide-2/ run-s build deploy:corona-second-wave:nationwide-2"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",

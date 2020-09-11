@@ -9,18 +9,12 @@ import ImageSlider from 'components/ImageSlider/ImageSlider'
 
 function App (_props) {
   const sliderConfig = {
-    //urlForValue: val => `./images/duration_of_intervention/${val}Mod.svg`,
-    //labelForValue: val => `SIR-Kurve mit Maßnahmendauer von ${val}`,
-    //min: 4,
-    //max: 8,
-    //step: 1,
-    //label: 'Wochen mit aktuellen Einschränkungen:'
-    urlForValue: val => `./images/schutzsuchendenquote/${val}_1.svg`,
-    labelForValue: val => `Situation für das Jahr ${val}`,
-    min: 2014,
-    max: 2019,
+    urlForValue: val => `./images/corona-second-wave/mosaic_1_of_2_${val * 7}_days.png`,
+    labelForValue: val => `Trenddauer von ${val} Wochen`,
+    min: 1,
+    max: 4,
     step: 1,
-    label: 'Anteil Schutzsuchende im Jahr:'
+    label: val => `Trenddauer in Wochen: ${val}`
   }
 
   return (
