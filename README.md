@@ -3,9 +3,8 @@
 To get started clone the repository and make sure you are on the correct branch and have all dependencies installed:
 
 ```
-git clone https://docs.rbb-online.de/bitbucket/scm/rdat/toggle-component.git
-cd toggle-component
-git checkout feature/image-slider
+git clone -b feature/image-slider https://docs.rbb-online.de/bitbucket/scm/rdat/toggle-component.git image-slider
+cd image-slider
 npm install
 ```
 
@@ -17,7 +16,7 @@ npm start
 
 Noice. A tab should open pointing you to `localhost:3000`.
 
-## Change the images
+## Create a new slider
 
 The slider is configured in `src/components/App/App.js`:
 
@@ -41,53 +40,18 @@ When adding images, make sure to put them somewhere in the `public` folder. Path
 Easy as 🥧! You build all the assets with `npm run build`. Depending on which project you want to deploy run one of the following commands directly afterwards.
 
 ```
-# uploads to https://dj1.app.rbb-cloud.de/corona-distancing-effects/
-npm run build-and-deploy:effects
+# Deploy already built artefacts
+npm run build-and-deploy corona-second-wave/nationwide-comparison
 
-# uploads to  https://dj1.app.rbb-cloud.de/corona-distancing-duration/
-npm run build-and-deploy:duration
+# Builds and deploys in one step
+npm run build-and-deploy corona-second-wave/nationwide-comparison
 ```
+
+The last argument determines the server path. In the above case the slider can accessed at https://dj1.app.rbb-cloud.de/image-sliders/corona-second-wave/nationwide-comparison/. All sliders are put into subfolders of https://dj1.app.rbb-cloud.de/image-sliders.
 
 ## Embed Code
 
-Either
-
-```
-<style>
-#rbb-data--image-slider--corona-distancing-effects { width: 1px; min-width: 100%; }
-@media screen and (max-width: 630px) {
-  #rbb-data--image-slider--corona-distancing-effects { width: 100%; margin-left: 0; }
-}
-</style>
-<iframe allowfullscreen="" id="rbb-data--image-slider--corona-distancing-effects" scrolling="no" src="https://dj1.app.rbb-cloud.de/corona-distancing-effects/" height="600" frameborder="0"></iframe>
-<script src="https://dj1.app.rbb-cloud.de/toggle-component/iframeResizer.min.js"></script>
-<script>iFrameResize({}, '#rbb-data--image-slider--corona-distancing-effects')</script>
-```
-
-or
-
-```
-<style>
-#rbb-data--image-slider--corona-distancing-duration { width: 1px; min-width: 100%; }
-@media screen and (max-width: 630px) {
-  #rbb-data--image-slider--corona-distancing-duration { width: 100%; margin-left: 0; }
-}
-</style>
-<iframe allowfullscreen="" id="rbb-data--image-slider--corona-distancing-duration" scrolling="no" src="https://dj1.app.rbb-cloud.de/corona-distancing-curation/" height="600" frameborder="0"></iframe>
-<script src="https://dj1.app.rbb-cloud.de/toggle-component/iframeResizer.min.js"></script>
-<script>iFrameResize({}, '#rbb-data--image-slider--corona-distancing-duration')</script>
-```
-
-## Add an additional slider
-
-To add an additional slider you need to do edit two files:
-
-- `src/components/App/App.js` for the configuration
-- `package.json` for deployment
-
-To configure deployment, add an additional `deploy:...` task, where `...` is a short description of your slider. Change the target directory (`/var/www/...` at the end of the line) so that `...` matches the name you just chose. Add an additional `build-and-deploy:...` task by copying one of the existing ones and changing `PUBLIC_URL` so that the folder matches your chosen `...`.
-
-The embed-code will have to be adjusted as well. Choose a unique ID and change it in lines 2, 4, 7 and 9. Make sure to also change the `src` attribute in line 7.
+The embed code will be shown after you run `npm run build-and-deploy some-neat-name/for-your-slider`.
 
 ## If all goes wrong
 

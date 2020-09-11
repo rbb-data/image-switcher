@@ -14,7 +14,7 @@ function App (_props) {
     min: 1,
     max: 4,
     step: 1,
-    label: val => `Trenddauer in Wochen: ${val}`
+    label: val => `Trenddauer von ${val} Wochen`
   }
 
   return (
