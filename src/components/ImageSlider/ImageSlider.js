@@ -53,9 +53,12 @@ export default function ImageSlider ({ config }) {
     return () => window.removeEventListener('resize', monitorAvailableSpace)
   }, [])
 
+  // make sure we don't have single stray words in the headline
+  let title = config.title != null && config.title.replace(/ (\S*)$/, '&nbsp;$1')
+
   return <div className={_.imageSliderComponent}>
     <section>
-      {config.title != null && <h1 className={_.imageSliderTitle}>{config.title}</h1>}
+      {config.title != null && <h1 className={_.imageSliderTitle} dangerouslySetInnerHTML={{__html: title}} />}
       <span className={_.imageSliderLabel}>{config.label(currentValue)}</span>
       <div className={_.rangeContainer}>
         <span className={_.labelMin}>{config.min}</span>
